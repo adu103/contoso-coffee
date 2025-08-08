@@ -82,6 +82,46 @@ npm run server
 npm run client
 ```
 
+## Testing
+
+### E2E Tests with Playwright
+
+Comprehensive end-to-end tests are implemented using Playwright, covering:
+- ✅ Full user journeys and workflows
+- ✅ Cross-browser testing (Chrome, Firefox, Safari)
+- ✅ Mobile device testing (iOS, Android)
+- ✅ API integration and error handling
+- ✅ Accessibility and performance testing
+
+**Run E2E Tests:**
+```bash
+# Run all E2E tests
+npm run test:e2e
+
+# Run tests with interactive UI
+npm run test:e2e:ui
+
+# Run tests with visible browser
+npm run test:e2e:headed
+
+# Debug tests step-by-step
+npm run test:e2e:debug
+
+# View detailed HTML report
+npm run test:e2e:report
+```
+
+**Test Coverage:**
+- Homepage functionality and content
+- Store page with product filtering
+- Navigation between pages
+- API error handling and recovery
+- Mobile responsiveness
+- Accessibility compliance
+- Performance benchmarks
+
+See [tests/README.md](tests/README.md) for detailed testing documentation.
+
 ## API Endpoints
 
 ### Products

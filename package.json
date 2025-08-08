@@ -8,12 +8,23 @@
     "server": "cd backend && npm run dev",
     "client": "cd frontend && npm start",
     "install-deps": "cd backend && npm install && cd ../frontend && npm install",
-    "build": "cd frontend && npm run build"
+    "build": "cd frontend && npm run build",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report"
   },
-  "keywords": ["coffee", "shop", "react", "express"],
+  "keywords": [
+    "coffee",
+    "shop",
+    "react",
+    "express"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@playwright/test": "^1.54.2",
     "concurrently": "^7.6.0"
   }
 }

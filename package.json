@@ -1,0 +1,19 @@
+{
+  "name": "contoso-coffee",
+  "version": "1.0.0",
+  "description": "Full-stack web application for Contoso Coffee shop",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "install-deps": "cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm run build"
+  },
+  "keywords": ["coffee", "shop", "react", "express"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

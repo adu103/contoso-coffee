@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: contoso-coffee-1923
+  AZURE_WEBAPP_NAME: contoso-coffee-linux
   NODE_VERSION: '18.x'
 
 jobs:

@@ -2,11 +2,10 @@ name: Deploy to Azure App Service
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, development ]
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: contoso-coffee-linux
   NODE_VERSION: '18.x'
 
 jobs:
@@ -16,6 +15,16 @@ jobs:
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v4
+
+    - name: 'Set environment variables'
+      run: |
+        if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          echo "AZURE_WEBAPP_NAME=contoso-coffee-linux" >> $GITHUB_ENV
+          echo "ENVIRONMENT=production" >> $GITHUB_ENV
+        elif [ "${{ github.ref }}" = "refs/heads/development" ]; then
+          echo "AZURE_WEBAPP_NAME=contoso-coffee-dev" >> $GITHUB_ENV
+          echo "ENVIRONMENT=development" >> $GITHUB_ENV
+        fi
 
     - name: 'Login to Azure'
       uses: azure/login@v1
@@ -53,3 +62,14 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: ./deploy
+
+    - name: 'Deployment Summary'
+      run: |
+        echo "🚀 Deployment completed!"
+        echo "Environment: ${{ env.ENVIRONMENT }}"
+        echo "App Name: ${{ env.AZURE_WEBAPP_NAME }}"
+        if [ "${{ env.ENVIRONMENT }}" = "production" ]; then
+          echo "🌐 Production URL: https://contoso-coffee-linux.azurewebsites.net"
+        elif [ "${{ env.ENVIRONMENT }}" = "development" ]; then
+          echo "🧪 Development URL: https://contoso-coffee-dev.azurewebsites.net"
+        fi

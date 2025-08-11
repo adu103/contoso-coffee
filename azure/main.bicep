@@ -5,7 +5,7 @@ param appName string = 'contoso-coffee-${uniqueString(resourceGroup().id)}'
 param location string = resourceGroup().location
 
 @description('The SKU for the App Service plan')
-param sku string = 'F1'
+param sku string = 'B1'
 
 // App Service Plan
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
@@ -14,9 +14,9 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   sku: {
     name: sku
   }
-  kind: 'app'
+  kind: 'linux'
   properties: {
-    reserved: false
+    reserved: true
   }
 }
 
@@ -27,7 +27,7 @@ resource appService 'Microsoft.Web/sites@2022-03-01' = {
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      nodeVersion: '18.x'
+      linuxFxVersion: 'NODE|18-lts'
       appCommandLine: 'npm start'
       appSettings: [
         {

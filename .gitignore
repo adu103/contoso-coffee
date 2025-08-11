@@ -12,6 +12,12 @@ backend/dist/
 .env.development.local
 .env.test.local
 .env.production.local
+# Keep production template
+!backend/.env.production
+
+# Azure deployment artifacts
+deploy/
+.azure/
 
 # Logs
 npm-debug.log*

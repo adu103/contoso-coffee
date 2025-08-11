@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -8,6 +9,11 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from React build in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'static')));
+}
 
 // Sample products data
 const products = [
@@ -89,6 +95,13 @@ app.get('/api/products/category/:category', (req, res) => {
   const filteredProducts = products.filter(p => p.category.toLowerCase() === category);
   res.json(filteredProducts);
 });
+
+// Serve React app for all other routes in production
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'index.html'));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`🚀 Contoso Coffee API server running on port ${PORT}`);

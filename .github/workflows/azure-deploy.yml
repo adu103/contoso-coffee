@@ -45,7 +45,8 @@ jobs:
         mkdir deploy
         cp -r backend/* deploy/
         cp -r frontend/build deploy/static
-        cp package.json deploy/
+        # Copy backend package.json as the main package.json (since server files are in root of deploy)
+        cp backend/package.json deploy/package.json
         
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
